@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Offers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(lightpink, #ffb6c1);
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .button {
+            background-color: lightblue;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #333;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background-color: #87ceeb;
+            color: white;
+        }
+
+        .specials-section {
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            background-color: #e6f7ff;
+            border: 2px solid #87ceeb;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-card p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .discount {
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .details-link {
+            display: inline-block;
+            color: #ff69b4;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .details-link:hover {
+            text-decoration: underline;
+            color: #87ceeb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Home Button -->
+    <div class="top-buttons">
+        <a href="index.html" class="button">Back to Home</a>
+    </div>
+
+    <!-- Section 1: 50% Off -->
+    <section class="specials-section">
+        <h2>50% Off</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <a href="product-detail.html?sku=030"></a>
+                <img src="135e2d769c0ec13a9543261b6a6ad62d.jpg" alt="Radiant Glow Serum">
+                <h3>Radiant Glow Serum</h3>
+                <p><span class="discount">₹499</span> <del>₹999</del></p>
+                <p>A nourishing serum that brightens and revitalizes your skin.</p>
+                <p>4.5⭐ (102)</p>
+                <a href="product-detail.html?sku=030" class="details-link">View Details</a>
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=031"></a>
+                <img src="512ede83a455ac95016611909c6d2cf4.jpg" alt="HydraBoost Moisturizer">
+                <h3>HydraBoost Moisturizer</h3>
+                <p><span class="discount">₹400</span> <del>₹799</del></p>
+                <p>Intense hydration for a fresh, dewy complexion all day long.</p>
+                <p>4.7⭐ (87)</p>
+                <a href="product-detail.html?sku=031" class="details-link">View Details</a>
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=032"></a>
+                <img src="WhatsApp Image 2024-11-02 at 20.53.41_5c3584c6.jpg" alt="Soothing Lip Balm">
+                <h3>Soothing Lip Balm</h3>
+                <p><span class="discount">₹150</span> <del>₹299</del></p>
+                <p>Softens and heals chapped lips with a natural formula.</p>
+                <p>4.6⭐ (54)</p>
+                <a href="product-detail.html?sku=032" class="details-link">View Details</a>
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=033"></a>
+                <img src="adb66770a95d0b262111973817fcd763.jpg" alt="Brightening Eye Cream">
+                <h3>Brightening Eye Cream</h3>
+                <p><span class="discount">₹450</span> <del>₹899</del></p>
+                <p>Reduces dark circles and puffiness for a refreshed look.</p>
+                <p>4.4⭐ (36)</p>
+                <a href="product-detail.html?sku=033" class="details-link">View Details</a>
+            </div>
+        </div>
+    </section>
+    <!-- Section 2: Buy 2 Get 1 Free -->
+    <section class="specials-section">
+        <h2>Combo Offer - Buy 2 Get 1 Free</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <a href="product-detail.html?sku=034"></a>
+                <img src="1ef4a03d2bce2f86cbebd00b2b3fe87b.jpg" alt="Vitamin C Facial Cleanser">
+                <h3>Vitamin C Facial Cleanser</h3>
+                <p>₹699</p>
+                <p>Gentle cleanser with Vitamin C for a brightened complexion.</p>
+                <p>4.3⭐ (60)</p>
+                <a href="product-detail.html?sku=034&offerType=buy2get1" class="details-link">View Details</a>
+
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=035"></a>
+                <img src="c2b6ff59eef39eb9a3e3540ab734064d.jpg" alt="Aloe Vera Gel">
+                <h3>Aloe Vera Gel</h3>
+                <p>₹499</p>
+                <p>Calms skin irritation and moisturizes deeply.</p>
+                <p>4.6⭐ (45)</p>
+                <a href="product-detail.html?sku=035&offerType=buy2get1" class="details-link">View Details</a>
+
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=036"></a>
+                <img src="c8d80a30fd0ef5f013c64688810e7e57.jpg" alt="Revitalizing Night Cream">
+                <h3>Revitalizing Night Cream</h3>
+                <p>₹1099</p>
+                <p>Hydrates and repairs your skin while you sleep.</p>
+                <p>4.5⭐ (72)</p>
+                <a href="product-detail.html?sku=036&offerType=buy2get1" class="details-link">View Details</a>
+
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=037"></a>
+                <img src="2ab4e13dbac8d32e04c551e5aa7d8810.jpg" alt="Rejuvenating Facial Oil">
+                <h3>Rejuvenating Facial Oil</h3>
+                <p>₹849</p>
+                <p>Restores radiance with nourishing oils.</p>
+                <p>4.2⭐ (50)</p>
+                <a href="product-detail.html?sku=037&offerType=buy2get1" class="details-link">View Details</a>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Section 3: Buy 2 Get 3 Free -->
+    <section class="specials-section">
+        <h2>Buy 2 Get 3 Free</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <a href="product-detail.html?sku=038"></a>
+                <img src="8781371513a5f6a828a8cc436fcf869b.jpg" alt="Charcoal Face Mask">
+                <h3>Charcoal Face Mask</h3>
+                <p>₹599</p>
+                <p>Deeply cleanses and removes impurities.</p>
+                <p>4.3⭐ (68)</p>
+                <a href="product-detail.html?sku=038&offerType=buy3get2" class="details-link">View Details</a>
+
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=039"></a>
+                <img src="382afd271948e9f2239c6ad2f78683cf.jpg" alt="Exfoliating Scrub">
+                <h3>Exfoliating Scrub</h3>
+                <p>₹750</p>
+                <p>Gently removes dead skin cells for a smooth texture.</p>
+                <p>4.4⭐ (52)</p>
+                <a href="product-detail.html?sku=039&offerType=buy3get2" class="details-link">View Details</a>
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=040"></a>
+                <img src="66408da25fb28ed589706c981ce69364.jpg" alt="Hydrating Face Mist">
+                <h3>Hydrating Face Mist</h3>
+                <p>₹399</p>
+                <p>Refreshes and hydrates for an instant glow.</p>
+                <p>4.5⭐ (40)</p>
+                <a href="product-detail.html?sku=040&offerType=buy3get2" class="details-link">View Details</a>
+            </div>
+            <div class="product-card">
+                <a href="product-detail.html?sku=041"></a>
+                <img src="adaae0cc46a19914e41c6d49700c2c26.jpg" alt="Nourishing Body Lotion">
+                <h3>Nourishing Body Lotion</h3>
+                <p>₹549</p>
+                <p>Locks in moisture for soft and smooth skin.</p>
+                <p>4.6⭐ (33)</p>
+                <a href="product-detail.html?sku=041&offerType=buy3get2" class="details-link">View Details</a>
+            </div>
+        </div>
+    
+    </section>
+
+</body>
+</html>

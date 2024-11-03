@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dermatifyd - Personalized Skincare Recommendations</title>
+    <style>
+        /* Overall page styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2e4e6; /* Baby pink background */
+        }
+
+        /* Header styling */
+        header {
+            background-color: #87cefa; /* Sky blue */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #87cefa; /* Sky blue */
+    padding: 10px 30px;
+}
+
+.navbar .logo {
+    font-size: 32px;
+    font-weight: bold;
+    font-family: 'Georgia', serif;
+    color: black; /* Darker color for logo */
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.navbar ul li a:hover {
+    color: #4CAF50; /* Light green hover */
+}
+
+.navbar .actions {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .actions a {
+    margin-left: 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar .actions a:hover {
+    color: #4CAF50;
+}
+
+.navbar .icons {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .icons img {
+    margin-left: 15px;
+    width: 24px;
+    height: 24px;
+}
+
+        /* Home page image styling */
+        .home-image {
+            background-image: url('751c1c7d450004899a589f6dc8419ee2.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        /* Section title styling */
+h2 {
+    color: #cc5d67; /* A darker shade of pink for text */
+    text-align: center;
+    margin-top: 40px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Image layout container */
+.image-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    margin: 40px 0;
+}
+
+/* Individual image styling */
+.image-section img {
+    width: 250px;
+    height: 350px;
+    object-fit: cover; /* Ensures images are not distorted */
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Caption styling */
+.image-section figcaption {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #8b3c48; /* Soft red/pink for the captions */
+    font-style: italic;
+}
+
+/* Form and recommendation styling */
+section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for separation */
+}
+
+/* Recommendation item styling */
+.recommendation-item a {
+    color: #87cefa; /* Sky blue for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Blog section styling */
+#blog ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#blog li {
+    margin-bottom: 10px;
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #87cefa;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+        /* Chat box styling */
+        .chatbox {
+            width: 300px;
+            background-color: skyblue;
+            border-radius: 8px;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatbox-header {
+            background-color: #87CEFA;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .chatbox-body {
+            background-color: #f4f4f9;
+            padding: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .chatbox-body p:nth-child(odd) {
+            background-color: #E0E0E0;
+        }
+
+        .chatbox-body p:nth-child(even) {
+            background-color: #DFF9FB;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #87CEFA;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #76B6D1;
+        }
+
+        /* Search bar styling */
+        .search-bar {
+            width: 300px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        .search-bar input[type="text"] {
+            border: none;
+            padding: 8px;
+            flex: 1;
+            border-radius: 20px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Search results container */
+        .search-results {
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+            max-width: 1000px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .search-results h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Product section styling */
+        .product-container {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .product-header {
+            color: #b56576;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .product-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-item:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-item h3 {
+            color: #b56576;
+            font-size: 20px;
+            margin: 20px 0 10px;
+        }
+
+        .product-item p {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .product-item .price {
+            color: #4CAF50;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-item a {
+            display: inline-block;
+            background-color: #87cefa; /* Sky blue */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .product-item a:hover {
+            background-color: #4CAF50; /* Green hover effect */
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- Navbar Section -->
+<header>
+    <div class="navbar">
+        <div class="logo">Dermatifyd</div>
+        <ul>
+            <li><a href="specials.html">SPECIALS</a></li>
+            <li><a href="product.html">PRODUCTS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+
+        <!-- Search Input and Button -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for products..." oninput="searchProducts()">
+            <button onclick="redirectToSearchResults()">Search</button>
+        </div>
+
+        <div class="icons">
+            <a href="login.html">Log In</a>
+            <img src="Sample_User_Icon.png" alt="User Icon">
+            <div class="cart-icon" onclick="window.location.href='cart.html'">
+                <img src="free-shopping-cart-icon-3045-thumb.png" alt="Cart Icon">
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- JavaScript for Redirecting to Search Results -->
+<script>
+    function redirectToSearchResults() {
+        const query = document.getElementById("search-input").value.trim();
+        if (query) {
+            // Redirect to search-results.html with the query as a URL parameter
+            window.location.href = `search-results.html?query=${encodeURIComponent(query)}`;
+        } else {
+            alert("Please enter a search term.");
+        }
+    }
+</script>
+
+
+
+    <!-- Home Image Section -->
+    <section class="home-image"></section>
+  </script>
+
+</body>
+</html>
+<!-- Product Section -->
+<div class="product-container">
+    <h2 class="product-header">Our Top Products</h2>
+    <div class="product-grid">
+
+        <!-- Product 1 -->
+        <div class="product-item">
+            <img src="76c0ca41f7c4d84c5c32b87d7ee61465.jpg" alt="Product 1 Image"> <!-- Replace with actual image -->
+            <h3>Hydrating Face Cream</h3>
+            <p>Deep hydration for smooth and glowing skin.</p>
+            <div class="price">₹599</div>
+            <a href="product-detail.html?sku=001">View Details</a>
+            <br><br>
+            <button class="add-cart" onclick="addToCart(1, 'Hydrating Face Cream', 599)">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item">
+            <img src="1aa082b6006e8c8fe199cec668744f29.jpg" alt="Product 2 Image"> <!-- Replace with actual image -->
+            <h3>Vitamin C Serum</h3>
+            <p>Brighten your complexion with daily serum.</p>
+            <div class="price">₹799</div>
+            <a href="product-detail.html?sku=002">View Details</a>
+            <br><br>
+            <button class="add-cart" onclick="addToCart(2, 'Vitamin C Serum', 799)">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-item">
+            <img src="WhatsApp Image 2024-10-26 at 13.09.45_fb132a4b.jpg" alt="Product 3 Image"> <!-- Replace with actual image -->
+            <h3>Smooth Shine Lipstick</h3>
+            <p>A creamy, high-shine lipstick that glides on smoothly, giving lips vibrant color and lasting moisture..</p>
+            <div class="price">₹499</div>
+            <a href="product-detail.html?sku=005">View Details</a>
+            <br><br>
+            <button class="add-cart" onclick="addToCart(3, 'SPF 50 Sunscreen', 499)">Add to Cart</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Initialize cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Update cart count display
+    const cartCountElement = document.getElementById('cart-count');
+    function updateCartCount() {
+        cartCountElement.textContent = cart.length;
+    }
+    updateCartCount(); // Display initial count
+
+    // Add product to cart with confirmation
+    function addToCart(id, name, price) {
+        if (confirm(`Are you sure you want to add "${name}" to the cart?`)) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+            if (itemIndex === -1) {
+                cart.push({ id, name, price, quantity: 1 });
+            } else {
+                cart[itemIndex].quantity += 1;
+            }
+
+            // Save updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount(); // Update the cart icon count
+            alert(`${name} added to cart!`);
+        }
+    }
+
+    // Display cart items when visiting cart.html (optional feature)
+    function displayCartItems() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        if (!cartItemsContainer) return; // Only run if on cart page
+
+        cartItemsContainer.innerHTML = '';
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `${item.name} - ₹${item.price} x ${item.quantity}`;
+                cartItemsContainer.appendChild(itemElement);
+            });
+        }
+    }
+    displayCartItems(); // Call only if on cart page
+</script>
+
+
+ <!-- Second Page: Skin Care Page Section -->
+ <section id="skin-care">
+    <h2>Taking care of your skin</h2>
+    <div class="image-section">
+        <figure>
+            <img src="f6cca7780f30eec59d26bf66aec43566.jpg" alt="Nourish your skin">
+            <figcaption>Nourish your skin, love your glow.</figcaption>
+        </figure>
+        <figure>
+            <img src="c3dcc0680f00a9ad68dc82089076a2dc.jpg" alt="Exfoliate, rejuvenate, glow.">
+            <figcaption>Exfoliate, rejuvenate, glow.</figcaption>
+        </figure>
+        <figure>
+            <img src="dbd7051f97c3817267ecbe0246600713.jpg" alt="Self-care is a shared ritual.">
+            <figcaption>Self-care is a shared ritual. 🤍</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- Third Page: Skin Types and Concerns -->
+<main>
+    <!-- User Selection Form -->
+    <section>
+        <div>
+            <h2>Choose Your Skincare Needs</h2>
+            <label for="skin-type">Select Skin Type:</label>
+            <select id="skin-type">
+                <option value="dry">Dry Skin</option>
+                <option value="oily">Oily Skin</option>
+                <option value="combination">Combination Skin</option>
+                <option value="sensitive">Sensitive Skin</option>
+            </select>
+        </div>
+        
+        <div>
+            <h3>Select Concerns:</h3>
+            <label><input type="checkbox" class="concern" value="acne"> Acne</label>
+            <label><input type="checkbox" class="concern" value="wrinkles"> Wrinkles</label>
+            <label><input type="checkbox" class="concern" value="darkspots"> Dark Spots</label>
+            <label><input type="checkbox" class="concern" value="redness"> Redness</label>
+        </div>
+        
+        <button onclick="showRecommendations()">Get Recommendations</button>
+
+        <!-- Display recommendation results here -->
+        <div id="recommendation-list"></div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <div id="recommendations" class="recommendations" style="display:none;">
+        <h2>Your Recommended Products</h2>
+        <div id="recommendation-list"></div>
+    </div>
+
+<!-- Blog Section -->
+<section id="blog">
+<h2>Blog</h2>
+<p>Read our latest articles on skincare tips and advice.</p>
+<ul>
+    <li>
+        <a href="https://mycocosoul.com/blogs/ayurvedic-skin-care/flowers-good-for-skincare" target="_blank">
+            Flowers That Are Good For Skincare: Ayurvedic Insights
+        </a>
+    </li>
+    <li>
+        <a href="https://theskinnerd.com/blogs/the-skin-nerd-blog/beauty-from-the-inside-out-why-you-should-try-a-skin-supplement-this-winter" target="_blank">
+            Beauty from the Inside Out: Why You Should Try a Skin Supplement This Winter
+        </a>
+    </li>
+</ul>
+</section>
+
+<!-- Footer section -->
+    <footer>
+        <div style="padding: 20px; background-color: #f1c9db; text-align: center;">
+            <p style="font-size: 16px; margin-bottom: 10px;">
+                <strong>Contact us:</strong> 
+                <a href="mailto:dermatifyd@gmail.com" style="color: #333; text-decoration: none;">dermatifyd@gmail.com</a> 
+                | Phone: <a href="tel:+9704804807" style="color: #333; text-decoration: none;">+9704804807</a>
+            </p>
+            <p>&copy; 2024 Dermatifyd. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+<button class="scroll-to-top" onclick="window.scrollTo(0, 0);">Top</button>
+
+<script>
+    // Function to show recommendations based on user selection
+    function showRecommendations() {
+        const skinType = document.getElementById('skin-type').value;
+        const concerns = Array.from(document.querySelectorAll('.concern:checked')).map(checkbox => checkbox.value);
+        const recommendationList = document.getElementById('recommendation-list');
+        recommendationList.innerHTML = ''; // Clear previous recommendations
+        const recommendations = {
+            dry: {
+                acne: [
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hIR9Ziz">CeraVe Hydrating Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5uiQ5C9">Sunscreen</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/1nMMArr">Salicylic Acid Serum</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.apollopharmacy.in/medicine/adaple-c-gel-5gm">Adaple C Gel</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/0cIjHd8">Moisturizer With Shea Butter</a></div>'
+                ],
+                wrinkles: [
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hIR9Ziz">CeraVe Hydrating Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/d9W5gKj">Retinol Cream</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/dFHiC66">Collagen Serum</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/cUQw0nK">Moisturizer With Vitamin E</a></div>'
+                ],
+                darkspots: [
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hIR9Ziz">CeraVe Hydrating Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/gD5iwcv">Vitamin C Serum</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/9K2l6V9">Niacinamide Cream</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/2Vdrg5e">Moisturizer With Licorice Root</a></div>'
+                ],
+                redness: [
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hIR9Ziz ">CeraVe Hydrating Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5uiQ5C9">Sunscreen</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/0cIjHd8">Moisturizer With Shea Butter</a></div>'
+                ]
+            },
+            oily: {
+                acne: [
+                    '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B0991FJH7V">Minimalist 10% Niacinamide Face Serum</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/dp/B01MSSDEPK">CeraVe Foaming Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/1nMMArr">Salicylic Acid Serum</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/dp/B01N39LZDA">Plum Niacinamide & Rice Water Gel Cream</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/dp/B0991FJH7V">Aqualogica Sunscreen SPF 50+</a></div>'
+                ],
+                wrinkles: [
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/dp/B01MSSDEPK">CeraVe Foaming Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/dp/B01N39LZDA">Plum Niacinamide & Rice Water Gel Cream</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/dp/B0991FJH7V">Aqualogica Sunscreen SPF 50+</a></div>'
+                ],
+                darkspots: [
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/cerave-foaming-cleanser-face-wash-for-oily-skin-with-hyaluronic-acid-ceramides-niacinamide/p/13169474?skuId=13169466&se=0">CeraVe Foaming Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/plum-thinkderma-2percent-niacinamide-rice-water-clear-moisture-gel-cream/p/10489448?se=0">Gel Cream For Oil-Free</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/aqualogica-glow-dewy-sunscreen-with-papaya-vitamin-c/p/10593377?skuId=5009759&se=0">Sunscreen SPF 50+</a></div>'
+                ],
+                redness: [
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/cerave-foaming-cleanser-face-wash-for-oily-skin-with-hyaluronic-acid-ceramides-niacinamide/p/13169474?skuId=13169466&se=0">CeraVe Foaming Cleanser</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/plum-thinkderma-2percent-niacinamide-rice-water-clear-moisture-gel-cream/p/10489448?se=0">Gel Cream For Oil-Free</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.nykaa.com/aqualogica-glow-dewy-sunscreen-with-papaya-vitamin-c/p/10593377?skuId=5009759&se=0">Sunscreen SPF 50+</a></div>'
+                ]
+            },
+            combination: {
+                acne: [
+                    '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/etlpr3y">Moisturising Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hoIOf8m">Toner</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hlX9sYq">Face Wash</a></div>'
+                ],
+                wrinkles: [
+                    '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/etlpr3y">Moisturising Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hoIOf8m">Toner</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hlX9sYq">Face Wash</a></div>'
+                ],
+                darkspots: [
+                    '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/etlpr3y">Moisturising Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hoIOf8m">Toner</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hlX9sYq">Face Wash</a></div>'
+                ],
+                redness: [
+                    '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+                    '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/driCy1B">Neem & Salicylic Acid Face Wash</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/etlpr3y">Moisturising Lotion</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/5cQzgGw">Sunscreen SPF 30+</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hoIOf8m">Toner</a></div>',
+                    '<div class="recommendation-item"><a href="https://amzn.in/d/hlX9sYq">Face Wash</a></div>'
+                ]
+            },
+    sensitive: {  // Add the new Sensitive skin type here
+        acne: [
+            '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+            '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/8qRtW0k">Cleansing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/5cza00b">Hydrating Face Wash</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0Wef9HU">Lightweight Serum</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0cIjHd8">Moisturizer With Shea Butter</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/e2awmnF">Sunscreen SPF 50+</a></div>'
+        ],
+        wrinkles: [
+            '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+            '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/8qRtW0k">Cleansing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/5cza00b">Hydrating Face Wash</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0Wef9HU">Lightweight Serum</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0cIjHd8">Moisturizer With Shea Butter</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/e2awmnF">Sunscreen SPF 50+</a></div>'
+        ],
+        darkspots: [
+            '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+            '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/8qRtW0k">Cleansing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/5cza00b">Hydrating Face Wash</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0Wef9HU">Lightweight Serum</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0cIjHd8">Moisturizer With Shea Butter</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/e2awmnF">Sunscreen SPF 50+</a></div>'
+        ],
+        redness: [
+            '<div class="recommendation-item"><a href="https://www.trbt.ly/l/2Z9K1E">Hyaluronic Acid Complex</a></div>',
+            '<div class="recommendation-item"><a href="https://www.amazon.in/dp/B01ER4HR4Q">Cetaphil Moisturizing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/8qRtW0k">Cleansing Lotion</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/5cza00b">Hydrating Face Wash</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/0Wef9HU">Lightweight Serum</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/akrfJzy">Moisturizer</a></div>',
+            '<div class="recommendation-item"><a href="https://amzn.in/d/e2awmnF">Sunscreen SPF 50+</a></div>'
+        ]
+            }
+        };
+        if (skinType && recommendations[skinType]) {
+            concerns.forEach(concern => {
+                if (recommendations[skinType][concern]) {
+                    recommendationList.innerHTML += `<h3>${concern.charAt(0).toUpperCase() + concern.slice(1)} Products:</h3>`;
+                    recommendations[skinType][concern].forEach(product => {
+                        recommendationList.innerHTML += product;
+                    });
+                }
+            });
+            document.getElementById('recommendations').style.display = 'block';
+        } else {
+            alert('Please select a skin type and at least one concern.');
+        }
+    }
+
+    // Scroll to Top Button
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    window.onscroll = () => {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    };
+
+    scrollToTopBtn.onclick = () => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    };
+
+    
+    // Chat Box Functionality
+    const chatBox = document.querySelector('.chat-box');
+    const chatMessages = document.querySelector('.chat-messages');
+    const chatInput = document.querySelector('.chat-input input');
+    const sendButton = document.querySelector('.chat-input button');
+
+    sendButton.onclick = () => {
+        const message = chatInput.value;
+        if (message.trim() !== '') {
+            const userMessage = document.createElement('div');
+            userMessage.textContent = `You: ${message}`;
+            chatMessages.appendChild(userMessage);
+            chatInput.value = '';
+
+            // Simulate a response
+            const botMessage = document.createElement('div');
+            botMessage.textContent = 'Bot: Thank you for your message!';
+            chatMessages.appendChild(botMessage);
+        }
+    };
+
+    // Show chat box
+    setTimeout(() => {
+        chatBox.style.display = 'flex';
+    }, 3000); // Show after 3 seconds
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Dermatifyd</title>
+    <style>
+        /* Background and page styling */
+        body {
+            background: linear-gradient(135deg, #FFB6C1, #87CEEB);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Login and signup container styling */
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        .container label {
+            display: block;
+            color: #333;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .container input[type="email"],
+        .container input[type="password"],
+        .container input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #87CEEB;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* Social login button styling */
+        .social-login {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+
+        .social-login button {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .social-login img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Links styling */
+        .container p a {
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .container p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div id="login-form">
+            <h2>Login to Dermatifyd</h2>
+            <form onsubmit="login(event)">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+                
+                <p>Or login with:</p>
+                <div class="social-login">
+                    <button onclick="socialLogin('google')"><img src="png-transparent-google-logo-g-suite-google-guava-google-plus-company-text-logo.png" alt="Google"></button>
+                    <button onclick="socialLogin('facebook')"><img src="png-clipart-facebook-logo-computer-icons-facebook-logo-facebook-thumbnail.png" alt="Facebook"></button>
+                    <button onclick="socialLogin('instagram')"><img src="hd-official-outline-instagram-ig-logo-icon-png-701751694786948nms5td2hyk.png" alt="Instagram"></button>
+                </div>
+
+                <p><a href="#" onclick="forgotPassword()">Forgot Password?</a> | <a href="#" onclick="showSignup()">Sign Up</a></p>
+            </form>
+        </div>
+
+        <!-- Signup Form (hidden by default) -->
+        <div id="signup-form" style="display: none;">
+            <h2>Sign Up for Dermatifyd</h2>
+            <form onsubmit="signup(event)">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="signup-email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="signup-password" name="password" required>
+
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="signup.html" onclick="showLogin()">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showSignup() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        function login(event) {
+            event.preventDefault();
+            // Here you'd normally verify credentials
+            alert("Logged in successfully!");
+            window.location.href = "index.html"; // Redirect to homepage
+        }
+
+        function signup(event) {
+            event.preventDefault();
+            // Here you'd normally create the user account
+            alert("Account created successfully!");
+            window.location.href = "index.html"; // Redirect to homepage
+        }
+
+        function forgotPassword() {
+            // Placeholder action for forgot password
+            alert("Password reset link sent to your email!");
+            window.location.href = "index.html"; // Redirect to homepage
+        }
+
+        function socialLogin(provider) {
+            alert("Logging in with " + provider + "...");
+            window.location.href = "index.html"; // Redirect to homepage
+        }
+    </script>
+</body>
+</html>

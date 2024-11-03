@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Care Products</title>
+    <style>
+        body {
+            background-color: #ffcccb; /* Baby pink background */
+            font-family: Arial, sans-serif;
+        }
+
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            margin: 20px;
+            padding: 12px 24px;
+            background-color: #ff6f91; /* Darker shade of pink */
+            color: #fff; /* White text color */
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem; /* Responsive font size */
+            font-weight: bold; /* Bold text for emphasis */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .back-to-home:hover {
+            background-color: #ff4c6d; /* Slightly darker shade on hover */
+        }
+
+        .back-to-home svg {
+            margin-right: 8px;
+            fill: #fff; /* White color for the home icon */
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+
+        .product-container {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .product-header {
+            color: #b56576;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .product-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        .product-item:active {
+            background-color: #87cefa;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-item h3 {
+            color: #b56576;
+            font-size: 18px;
+            margin: 15px 0 10px;
+        }
+
+        .product-item .price {
+            color: #4CAF50;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-item .old-price {
+            color: #888;
+            text-decoration: line-through;
+            margin-right: 5px;
+        }
+
+        .product-item .rating {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .product-item a {
+            display: inline-block;
+            background-color: #87cefa;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .product-item a:hover {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+        Back to Home
+    </a>
+
+    <section class="product-container">
+        <h2 class="product-header">Recommendations</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <a href="product-detail.html?sku=001">
+                    <img src="76c0ca41f7c4d84c5c32b87d7ee61465.jpg" alt="Hydrating Face Cream">
+                    <h3>Hydrating Face Cream</h3>
+                    <p class="price">₹599</p>
+                    <p class="rating">⭐ 4.8 (18)</p>
+                </a>
+            </div>
+            <div class="product-item">
+                <a href="product-detail.html?sku=002">
+                    <img src="1aa082b6006e8c8fe199cec668744f29.jpg" alt="Vitamin C Serum">
+                    <h3>Vitamin C Serum</h3>
+                    <p class="price"><span class="old-price">₹1400</span> ₹799</p>
+                    <p class="rating">⭐ 4.8 (18)</p>
+                </a>
+            </div>
+            <div class="product-item">
+                <a href="product-detail.html?sku=003">
+                    <img src="e3043e4a8e9e20aba5545fca1b18ddc2.jpg" alt="SPF 50 Sunscreen">
+                    <h3>SPF 50 Sunscreen</h3>
+                    <p class="price">₹300</p>
+                    <p class="rating">⭐ 4.6 (21)</p>
+                </a>
+            </div>
+            <div class="product-item">
+                <a href="product-detail.html?sku=004">
+                    <img src="62f69e54a860df944d683f5035c5973c.jpg" alt="Face Setting Powder">
+                    <h3>Face Setting Powder</h3>
+                    <p class="price">₹1200</p>
+                    <p class="rating">⭐ 4.6 (19)</p>
+                </a>
+            </div>
+            <div class="product-item">
+                <a href="product-detail.html?sku=005">
+                    <img src="WhatsApp Image 2024-10-26 at 13.09.45_fb132a4b.jpg" alt="Smooth Shine Lipstick">
+                    <h3>Smooth Shine Lipstick</h3>
+                    <p class="price">₹1200</p>
+                    <p class="rating">⭐ 4.8 (22)</p>
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+    <!-- Most Liked & Purchased Section with 5 Products -->
+    <h2 class="product-header">Most Liked & Purchased</h2>
+    <div class="product-grid">
+        <div class="product-item">
+            <a href="product-detail.html?sku=006">
+                <img src="WhatsApp Image 2024-10-26 at 13.11.36_d5f123a8.jpg" alt="Luxury Perfume">
+                <h3>Luxury Perfume</h3>
+                <p class="price">₹1500</p>
+                <p class="rating">⭐ 4.8 (21)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=007">
+                <img src="WhatsApp Image 2024-10-26 at 13.12.52_945d82ef.jpg" alt="Florie Eau de Parfum">
+                <h3>Florie Eau de Parfum</h3>
+                <p class="price">₹1200</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=008">
+                <img src="f7698e94d2f433b7b5a5d3885bfe3a0a.jpg" alt="Beauty Blender">
+                <h3>Beauty Blender</h3>
+                <p class="price"><span class="old-price">₹300</span> ₹250</p>
+                <p class="rating">⭐ 4.8 (17)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=009">
+                <img src="db6b661f82aec1d23f8f89b788428c70.jpg" alt="Hair Trimmer">
+                <h3>Hair Trimmer</h3>
+                <p class="price">₹1200</p>
+                <p class="rating">⭐ 4.8 (15)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=010">
+                <img src="120ce1e9478e37bfb708f7ae3ef4e811.jpg" alt="Face Bronzer">
+                <h3>Face Bronzer</h3>
+                <p class="price">₹900</p>
+                <p class="rating">⭐ 4.8 (20)</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Our Products Section with 10 Products -->
+    <h2 class="product-header">Our Products</h2>
+    <div class="product-grid">
+        <div class="product-item">
+            <a href="product-detail.html?sku=011">
+                <img src="WhatsApp Image 2024-10-26 at 13.14.39_b1f5e253.jpg" alt="Lip Gloss">
+                <h3>Lip Gloss</h3>
+                <p class="price">₹400</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=012">
+                <img src="67b98f1367910799e487a7cb6d0878e5.jpg" alt="Moisturizing Body Lotion">
+                <h3>Moisturizing Body Lotion</h3>
+                <p class="price">₹600</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=013">
+                <img src="8db79c305b4a61af349efd00e346425e.jpg" alt="Hyaluronic Acid Serum">
+                <h3>Hyaluronic Acid Serum</h3>
+                <p class="price">₹800</p>
+                <p class="rating">⭐ 4.7 (22)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=014">
+                <img src="f28e63164e4807ac0629724fc863e9fe.jpg" alt="Refreshing Face Mist">
+                <h3>Refreshing Face Mist</h3>
+                <p class="price">₹500</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=015">
+                <img src="100b62e99d35ae30b7f0248c454378b1.jpg" alt="Anti-Aging Night Cream">
+                <h3>Anti-Aging Night Cream</h3>
+                <p class="price">₹1500</p>
+                <p class="rating">⭐ 4.9 (25)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=016">
+                <img src="0580fcf83c63d0719a3b534255a1892a.jpg" alt="Face Oil">
+                <h3>Face Oil</h3>
+                <p class="price">₹1000</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=017">
+                <img src="120ce1e9478e37bfb708f7ae3ef4e811.jpg" alt="Face Bronzer">
+                <h3>Face Bronzer</h3>
+                <p class="price">₹900</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=018">
+                <img src="7b08cb76be9554eaf405b56f79bf7d78.jpg" alt="Mascara">
+                <h3>Mascara</h3>
+                <p class="price">₹350</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=019">
+                <img src="WhatsApp Image 2024-10-26 at 13.10.35_f513b31b.jpg" alt="Eyeshadow Palette">
+                <h3>Eyeshadow Palette</h3>
+                <p class="price">₹1500</p>
+                <p class="rating">⭐ 4.9 (30)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=020">
+                <img src="de8cfedb8988f2b0e68fbcd84b516f8f.jpg" alt="Compact Powder">
+                <h3>Compact Powder</h3>
+                <p class="price">₹600</p>
+                <p class="rating">⭐ 4.7 (20)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=021">
+                <img src="501b953749411e8627777ec28c963676.jpg" alt="Soothing Hand Cream">
+                <h3>Soothing Hand Cream</h3>
+                <p class="price">₹350</p>
+                <p class="rating">⭐ 4.6 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=022">
+                <img src="WhatsApp Image 2024-10-26 at 13.09.45_fb132a4b.jpg" alt="Smooth Shine Lipstick">
+                <h3>Smooth Shine Lipstick</h3>
+                <p class="price">₹450</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=023">
+                <img src="WhatsApp Image 2024-10-26 at 13.11.36_d5f123a8.jpg" alt="Luxury Perfume">
+                <h3>Luxury Perfume</h3>
+                <p class="price">₹1500</p>
+                <p class="rating">⭐ 4.7 (20)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=024">
+                <img src="382afd271948e9f2239c6ad2f78683cf.jpg" alt="Exfoliating Scrub">
+                <h3>Exfoliating Scrub</h3>
+                <p class="price">₹750</p>
+                <p class="rating">⭐ 4.8 (18)</p>
+            </a>
+        </div>
+        <div class="product-item">
+            <a href="product-detail.html?sku=025">
+                <img src="be683d8d3016175e19ad791b5f6159d2.jpg" alt="Gentle Makeup Remover">
+                <h3>Gentle Makeup Remover</h3>
+                <p class="price">₹500</p>
+                <p class="rating">⭐ 4.6 (22)</p>
+            </a>
+        </div>
+
+      <!-- Extra Products Added -->
+      <div class="product-item">
+        <a href="product-detail.html?sku=026">
+            <img src="c6b9a2a581c2620eb25ccd0041a4f3c0.jpg" alt="Gentle Face Wash">
+            <h3>Gentle Face Wash</h3>
+            <p class="price">₹300</p>
+            <p class="rating">⭐ 4.5 (15)</p>
+        </a>
+    </div>
+    <div class="product-item">
+        <a href="product-detail.html?sku=027">
+            <img src="901f05b73177b8930f037ec2dc4f3750.jpg" alt="Balancing Toner">
+            <h3>Balancing Toner</h3>
+            <p class="price">₹400</p>
+            <p class="rating">⭐ 4.7 (20)</p>
+        </a>
+    </div>
+    <div class="product-item">
+        <a href="product-detail.html?sku=028">
+            <img src="f7698e94d2f433b7b5a5d3885bfe3a0a.jpg" alt="Beauty Blender">
+            <h3>Beauty Blender</h3>
+            <p class="price"><span class="old-price">₹300</span> ₹250</p>
+            <p class="rating">⭐ 4.8 (22)</p>
+        </a>
+    </div>
+    <div class="product-item">
+        <a href="product-detail.html?sku=029">
+            <img src="f862a6df592628d2fc58ae484b8185ac.jpg" alt="Purifying Clay Mask">
+            <h3>Purifying Clay Mask</h3>
+            <p class="price">₹650</p>
+            <p class="rating">⭐ 4.6 (18)</p>
+        </a>
+    </div>
+</div>
+</body>
+</html>

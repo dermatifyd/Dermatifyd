@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        /* Background colors */
+        body {
+            background: linear-gradient(to right, #ffcad4, #a0e7e5);
+            font-family: Arial, sans-serif;
+            color: #333;
+            padding: 20px;
+        }
+
+        .search-results {
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .product-info h3 {
+            margin: 0;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .view-details-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Search Results Section -->
+    <div class="search-results" id="results-container">
+        <h2>Search Results</h2>
+        <div id="product-list"></div>
+    </div>
+
+    <!-- JavaScript for handling search functionality and product data -->
+    <script>
+        // Product data
+        const products = {
+            "001": { name: "Hydrating Face Cream", price: 599, sku: "001", description: "A rich, moisture-boosting cream that keeps skin soft and hydrated all day long. Perfect for dry and sensitive skin types.", image: "76c0ca41f7c4d84c5c32b87d7ee61465.jpg" },
+            "002": { name: "Vitamin C Serum", price: 799, sku: "002", description: "Brightens and evens skin tone, reducing dark spots and boosting radiance with a potent blend of Vitamin C.", image: "1aa082b6006e8c8fe199cec668744f29.jpg" },
+            "003": { name: "SPF 50 SunScreen", price: 300, sku: "003", description: "Lightweight, broad-spectrum protection to guard against UVA/UVB rays, preventing sunburn and premature aging", image: "e3043e4a8e9e20aba5545fca1b18ddc2.jpg" },
+            "004": { name: "Face Setting Powder", price: 1200, sku: "004", description: "Mattifying and long-lasting, this powder sets makeup while reducing shine for a flawless finish", image: "62f69e54a860df944d683f5035c5973c.jpg" },
+            
+           
+            "007": { name: "Florie Eau de Parfum ", price: 1200, sku: "007", description: "A floral-inspired perfume with captivating, delicate notes, perfect for any occasion.", image: "WhatsApp Image 2024-10-26 at 13.12.52_945d82ef.jpg" },
+           
+            "009": { name: "Hair trimmer ", price: 1200, sku: "009", description: "Precision trimmer for easy hair removal, designed to be gentle on skin while achieving smooth results.", image: "db6b661f82aec1d23f8f89b788428c70.jpg" },
+            "010": { name: "Face bronzer", price: 900, sku: "010", description: "Adds a natural, sun-kissed glow with a blendable formula for contouring and highlighting.", image: "120ce1e9478e37bfb708f7ae3ef4e811.jpg" },
+            "011": { name: "Lip Gloss", price: 400, sku: "011", description: "Non-sticky, glossy lip shine that adds a pop of color and moisture for a plump, hydrated look.", image: "WhatsApp Image 2024-10-26 at 13.14.39_b1f5e253.jpg" },
+            "012": { name: "Moisturizing Body Lotion", price: 600, sku: "012", description: "Nourishing body lotion that hydrates and soothes dry skin, leaving it silky and soft.", image: "67b98f1367910799e487a7cb6d0878e5.jpg" },
+            "013": { name: "hydrolonic acid serum", price: 800, sku: "013", description: "Deeply hydrating serum that plumps skin and reduces the appearance of fine lines.", image: "8db79c305b4a61af349efd00e346425e.jpg" },
+            "014": { name: "Refreshing face mist", price: 500, sku: "014", description: "Instantly revitalizes skin with a cooling mist, leaving it refreshed and glowing.", image: "f28e63164e4807ac0629724fc863e9fe.jpg" },
+            "015": { name: "Anti-Aging night cream", price: 1500, sku: "015", description: "A nourishing cream that fights signs of aging overnight, for firmer, smoother skin.", image: "100b62e99d35ae30b7f0248c454378b1.jpg" },
+            "016": { name: "Face oil", price: 1000, sku: "016", description: "Luxurious oil that hydrates and brightens skin, promoting a healthy, dewy glow.", image: "0580fcf83c63d0719a3b534255a1892a.jpg" },
+            "017": { name: "Face bronzer", price: 900, sku: "017", description: "Soft, reusable blending sponge that ensures seamless foundation application and a flawless finish.", image: "120ce1e9478e37bfb708f7ae3ef4e811.jpg" },
+            "018": { name: "Mascara", price: 350, sku: "018", description: "Adds length and volume to lashes for a dramatic look that lasts all day without clumping.", image: "7b08cb76be9554eaf405b56f79bf7d78.jpg" },
+            "019": { name: "Eyeshadow Palette", price: 1500, sku: "019", description: " A versatile palette with rich pigments, perfect for creating both subtle and bold eye looks.", image: "WhatsApp Image 2024-10-26 at 13.10.35_f513b31b.jpg" },
+            "020": { name: "Compact Powder", price: 600, sku: "020", description: "Lightweight, mattifying powder that controls shine and sets makeup for a natural finish.", image: "de8cfedb8988f2b0e68fbcd84b516f8f.jpg" },
+            "021": { name: "Soothing Hand Cream", price: 350, sku: "021", description: "A non-greasy, hydrating formula that keeps hands soft and smooth, even in harsh conditions.", image: "501b953749411e8627777ec28c963676.jpg" },
+            "022": { name: "Smooth shine lipstick", price: 1200, sku: "022", description: "Highly pigmented, moisturizing lipstick that delivers a smooth, glossy finish for plump-looking lips.", image: "WhatsApp Image 2024-10-26 at 13.09.45_fb132a4b.jpg" },
+            "023": { name: "Luxury perfume", price: 1500, sku: "023", description: "An elegant and lasting fragrance that adds a touch of sophistication to every moment.", image: "WhatsApp Image 2024-10-26 at 13.11.36_d5f123a8.jpg" },
+            "024": { name: "Exfoliating Scrub", price: 750, sku: "024", description: "Gentle scrub that removes dead skin cells, leaving skin polished, soft, and radiant.", image: "382afd271948e9f2239c6ad2f78683cf.jpg" },
+            "025": { name: "Gentle Makeup Remover", price: 500, sku: "025", description: "Removes makeup effectively without irritation, leaving skin clean and refreshed.", image: "be683d8d3016175e19ad791b5f6159d2.jpg" },
+            "026": { name: "Gentle Face Wash", price: 300, sku: "026", description: "A mild cleanser that cleans without stripping natural oils, suitable for daily use.", image: "c6b9a2a581c2620eb25ccd0041a4f3c0.jpg" },
+            "027": { name: "Balancing Toner", price: 400, sku: "027", description: "Helps restore skin’s pH balance, reducing oiliness and refining pores for a fresh look.", image: "901f05b73177b8930f037ec2dc4f3750.jpg"},
+            "028": { name: "Beauty blender", price: 250, sku: "028", description: "Soft, reusable blending sponge that ensures seamless foundation application and a flawless finish.", image: "f7698e94d2f433b7b5a5d3885bfe3a0a.jpg" },
+            "029": { name: "Purifying Clay Mask", price: 650, sku: "029", description: "Deep-cleansing clay mask that detoxifies skin and minimizes pores for a clearer complexion.", image: "f862a6df592628d2fc58ae484b8185ac.jpg"},
+            "030": { name: "Radiant Glow Serum", price: 499, originalPrice: 999, sku: "030", description: "Intense hydration for a fresh, dewy complexion all day long.", image: "135e2d769c0ec13a9543261b6a6ad62d.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "031": { name: "HydraBoost Moisturizer", price: 400, originalPrice: 799, sku: "031", description: "Intense hydration for a fresh, dewy complexion all day long.", image: "512ede83a455ac95016611909c6d2cf4.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "032": { name: "Soothing Lip Balm", price: 150, originalPrice: 250, sku: "032", description: "Softens and heals chapped lips with a natural formula", image: "WhatsApp Image 2024-11-02 at 20.53.41_5c3584c6.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "033": { name: "Brightening Eye Cream", price: 450, originalPrice: 899, sku: "033", description: "Reduces dark circles and puffiness for a refreshed look.", image: "adb66770a95d0b262111973817fcd763.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "034": { name: "Vitamin C Facial Cleanser", price: 699, sku: "034", description: "Gentle cleanser with Vitamin C for a brightened complexion.", image: "1ef4a03d2bce2f86cbebd00b2b3fe87b.jpg" },
+            "035": { name: "Aloe Vera Gel", price: 499, sku: "035", description: "Calms skin irritation and moisturizes deeply.", image: "c2b6ff59eef39eb9a3e3540ab734064d.jpg" },
+            "036": { name: "Revitalizing Night Cream", price: 1099, sku: "036", description: " Hydrates and repairs your skin while you sleep.", image: "c8d80a30fd0ef5f013c64688810e7e57.jpg" },
+            "037": { name: "Rejuvenating Facial Oil", price: 849, sku: "037", description: "Restores radiance with nourishing oils.", image: "2ab4e13dbac8d32e04c551e5aa7d8810.jpg" },
+            "038": { name: "Charcoal Face Mask", price: 599, sku: "038", description: "Deeply cleanses and removes impurities", image: "8781371513a5f6a828a8cc436fcf869b.jpg" },
+           
+            "040": { name: "Hydrating Face Mist", price: 399, sku: "040", description: "Refreshes and hydrates for an instant glow.", image: "66408da25fb28ed589706c981ce69364.jpg" },
+            "041": { name: "Nourishing Body Lotion", price: 549, sku: "041", description: "Nourishing Body Lotion.", image: "adaae0cc46a19914e41c6d49700c2c26.jpg" }
+        };
+
+        // Function to get the query parameter from URL
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || "";
+        }
+
+        // Function to display search results based on the query
+        function displaySearchResults() {
+            const query = getQueryParameter("query").toLowerCase();
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = ''; // Clear previous results
+
+            // Filter products based on partial match in the name
+            const filteredProducts = Object.values(products).filter(product =>
+                product.name.toLowerCase().includes(query)
+            );
+
+            // Display matching products or a message if no products are found
+            if (filteredProducts.length > 0) {
+                filteredProducts.forEach(product => {
+                    // Create product item container
+                    const productItem = document.createElement("div");
+                    productItem.classList.add("product-item");
+
+                    // Add product item HTML content
+                    productItem.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <p>${product.description}</p>
+                            <div class="product-price">₹${product.price}</div>
+                            <a href="product-detail.html?sku=${product.sku}" class="view-details-link">View Details</a>
+                        </div>
+                    `;
+
+                    // Append the product item to the product list
+                    productList.appendChild(productItem);
+                });
+            } else {
+                // Show a message if no products are found
+                productList.innerHTML = "<p>No products found matching your search.</p>";
+            }
+        }
+
+        // Run the search on page load
+        window.onload = displaySearchResults;
+    </script>
+</body>
+</html>

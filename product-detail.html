@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4c2c2; /* Baby pink background */
+            background-image: linear-gradient(135deg, #f4c2c2, #ffd1dc); /* Gradient for depth */
+            background-attachment: fixed;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #87ceeb; /* Light blue background */
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Back to Home Button */
+        .back-home-btn, .previous-btn {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            background-color: #ffcccb;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-home-btn {
+            top: 10px;
+            left: 10px;
+        }
+
+        .previous-btn {
+            top: 50px; /* Adjusted to appear below "Back to Home" */
+            left: 10px;
+        }
+
+        .back-home-btn img, .previous-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .back-home-btn:hover, .previous-btn:hover {
+            background-color: #ffb3b3;
+        }
+
+        /* Cart Icon Styling */
+        .cart-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cart-icon img {
+            width: 30px;
+            height: auto;
+        }
+
+        #cart-count {
+            font-size: 1em;
+            background-color: #ffcccb;
+            color: #333;
+            padding: 3px 8px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        .product-detail {
+            display: flex;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .product-image img {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-info {
+            margin-left: 20px;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .price, .sku {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .quantity-selector {
+            margin-top: 20px;
+        }
+
+        .quantity-selector input {
+            width: 50px;
+            padding: 5px;
+            margin-left: 10px;
+            font-size: 1em;
+        }
+
+        .add-to-cart, .buy-now {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #87ceeb;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-to-cart:hover, .buy-now:hover {
+            background-color: #00bfff;
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Home Button with Logo -->
+    <a href="index.html" class="back-home-btn">
+        <img src="1306737-200.png" alt="Dermatifyd Logo"> Back to Home
+    </a>
+
+   <!-- Previous Button -->
+<a href="product.html" class="previous-btn">
+    Previous
+</a>
+
+    <!-- Navbar with Light Blue Background and Cart Icon on Right -->
+    <header>
+        <h1>Dermatifyd</h1>
+        <div class="cart-icon" onclick="window.location.href='cart.html'">
+            <img src="free-shopping-cart-icon-3045-thumb.png" alt="Cart Icon">
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="product-detail">
+        <div class="product-image">
+            <img src="" alt="Product Image" id="product-image">
+        </div>
+        <div class="product-info">
+            <h1 id="product-name">Hydrating Face Cream</h1>
+            <p class="sku" id="product-sku">SKU: 001</p>
+            <p class="price" id="product-price">₹599</p>
+
+            <div class="quantity-selector">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+            </div>
+
+            <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+
+            <div class="product-description">
+                <h3>Product Info</h3>
+                <p id="product-description">A nourishing face cream.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const cart = [];
+
+function addToCart() {
+    const productId = document.getElementById("product-sku").textContent;
+    const productName = document.getElementById("product-name").textContent;
+    const productPrice = parseInt(document.getElementById("product-price").textContent.replace("₹", ""));
+    const quantity = parseInt(document.getElementById("quantity").value);
+
+    // Check if the product is already in the cart
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += quantity; // Update quantity if item is already in the cart
+    } else {
+        const cartItem = {
+            id: productId,
+            name: productName,
+            price: productPrice,
+            quantity: quantity,
+        };
+        cart.push(cartItem);
+    }
+
+    updateCartCount();
+    checkPromotions();
+    alert(`${quantity} ${productName} added to cart!`);
+}
+
+function updateCartCount() {
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById("cart-count").textContent = cartCount;
+}
+
+function checkPromotions() {
+    const groupedItems = cart.reduce((acc, item) => {
+        acc[item.id] = (acc[item.id] || 0) + item.quantity;
+        return acc;
+    }, {});
+
+    let freeItems = [];
+
+    // Check for "Buy 2 Get 1 Free" promotion for product IDs 034 to 037
+    for (const [id, qty] of Object.entries(groupedItems)) {
+        if (["034", "035", "036", "037"].includes(id) && qty >= 2) {
+            const freeQty = Math.floor(qty / 2); // For every 2 bought, 1 free
+            freeItems.push(...Array(freeQty).fill(id)); // Add eligible free items
+        }
+    }
+
+    // Check for "Buy 3 Get 2 Free" promotion for product IDs 038 to 041
+    for (const [id, qty] of Object.entries(groupedItems)) {
+        if (["038", "039", "040", "041"].includes(id) && qty >= 3) {
+            const freeQty = Math.floor(qty / 3) * 2; // For every 3 bought, 2 free
+            freeItems.push(...Array(freeQty).fill(id)); // Add eligible free items
+        }
+    }
+
+    if (freeItems.length > 0) {
+        addFreeItemsToCart(freeItems);
+    }
+}
+
+function addFreeItemsToCart(freeItems) {
+    freeItems.forEach(id => {
+        const existingFreeItem = cart.find(item => item.id === id && item.isFree);
+
+        if (existingFreeItem) {
+            existingFreeItem.quantity += 1;
+        } else {
+            const product = products[id];
+            const freeItem = {
+                id: id,
+                name: `${product.name} (Free)`,
+                price: 0, // Free items have no cost
+                quantity: 1,
+                isFree: true,
+            };
+            cart.push(freeItem);
+        }
+    });
+
+    updateCartCount();
+}
+
+
+        const products = {
+            "001": { name: "Hydrating Face Cream", price: 599, sku: "001", description: "A rich, moisture-boosting cream that keeps skin soft and hydrated all day long. Perfect for dry and sensitive skin types.", image: "76c0ca41f7c4d84c5c32b87d7ee61465.jpg" },
+            "002": { name: "Vitamin C Serum", price: 799, sku: "002", description: "Brightens and evens skin tone, reducing dark spots and boosting radiance with a potent blend of Vitamin C.", image: "1aa082b6006e8c8fe199cec668744f29.jpg" },
+            "003": { name: "SPF 50 SunScreen", price: 300, sku: "003", description: "Lightweight, broad-spectrum protection to guard against UVA/UVB rays, preventing sunburn and premature aging", image: "e3043e4a8e9e20aba5545fca1b18ddc2.jpg" },
+            "004": { name: "Face Setting Powder", price: 1200, sku: "004", description: "Mattifying and long-lasting, this powder sets makeup while reducing shine for a flawless finish", image: "62f69e54a860df944d683f5035c5973c.jpg" },
+            "005": { name: "Smooth shine lipstick", price: 1200, sku: "005", description: "Highly pigmented, moisturizing lipstick that delivers a smooth, glossy finish for plump-looking lips.", image: "WhatsApp Image 2024-10-26 at 13.09.45_fb132a4b.jpg" },
+            "006": { name: "Luxury perfume", price: 1500, sku: "006", description: "An elegant and lasting fragrance that adds a touch of sophistication to every moment.", image: "WhatsApp Image 2024-10-26 at 13.11.36_d5f123a8.jpg" },
+            "007": { name: "Florie Eau de Parfum ", price: 1200, sku: "007", description: "A floral-inspired perfume with captivating, delicate notes, perfect for any occasion.", image: "WhatsApp Image 2024-10-26 at 13.12.52_945d82ef.jpg" },
+            "008": { name: "Beauty blender", price: 250, sku: "008", description: "Soft, reusable blending sponge that ensures seamless foundation application and a flawless finish.", image: "f7698e94d2f433b7b5a5d3885bfe3a0a.jpg" },
+            "009": { name: "Hair trimmer ", price: 1200, sku: "009", description: "Precision trimmer for easy hair removal, designed to be gentle on skin while achieving smooth results.", image: "db6b661f82aec1d23f8f89b788428c70.jpg" },
+            "010": { name: "Face bronzer", price: 900, sku: "010", description: "Adds a natural, sun-kissed glow with a blendable formula for contouring and highlighting.", image: "120ce1e9478e37bfb708f7ae3ef4e811.jpg" },
+            "011": { name: "Lip Gloss", price: 400, sku: "011", description: "Non-sticky, glossy lip shine that adds a pop of color and moisture for a plump, hydrated look.", image: "WhatsApp Image 2024-10-26 at 13.14.39_b1f5e253.jpg" },
+            "012": { name: "Moisturizing Body Lotion", price: 600, sku: "012", description: "Nourishing body lotion that hydrates and soothes dry skin, leaving it silky and soft.", image: "67b98f1367910799e487a7cb6d0878e5.jpg" },
+            "013": { name: "hydrolonic acid serum", price: 800, sku: "013", description: "Deeply hydrating serum that plumps skin and reduces the appearance of fine lines.", image: "8db79c305b4a61af349efd00e346425e.jpg" },
+            "014": { name: "Refreshing face mist", price: 500, sku: "014", description: "Instantly revitalizes skin with a cooling mist, leaving it refreshed and glowing.", image: "f28e63164e4807ac0629724fc863e9fe.jpg" },
+            "015": { name: "Anti-Aging night cream", price: 1500, sku: "015", description: "A nourishing cream that fights signs of aging overnight, for firmer, smoother skin.", image: "100b62e99d35ae30b7f0248c454378b1.jpg" },
+            "016": { name: "Face oil", price: 1000, sku: "016", description: "Luxurious oil that hydrates and brightens skin, promoting a healthy, dewy glow.", image: "0580fcf83c63d0719a3b534255a1892a.jpg" },
+            "017": { name: "Face bronzer", price: 900, sku: "017", description: "Soft, reusable blending sponge that ensures seamless foundation application and a flawless finish.", image: "120ce1e9478e37bfb708f7ae3ef4e811.jpg" },
+            "018": { name: "Mascara", price: 350, sku: "018", description: "Adds length and volume to lashes for a dramatic look that lasts all day without clumping.", image: "7b08cb76be9554eaf405b56f79bf7d78.jpg" },
+            "019": { name: "Eyeshadow Palette", price: 1500, sku: "019", description: " A versatile palette with rich pigments, perfect for creating both subtle and bold eye looks.", image: "WhatsApp Image 2024-10-26 at 13.10.35_f513b31b.jpg" },
+            "020": { name: "Compact Powder", price: 600, sku: "020", description: "Lightweight, mattifying powder that controls shine and sets makeup for a natural finish.", image: "de8cfedb8988f2b0e68fbcd84b516f8f.jpg" },
+            "021": { name: "Soothing Hand Cream", price: 350, sku: "021", description: "A non-greasy, hydrating formula that keeps hands soft and smooth, even in harsh conditions.", image: "501b953749411e8627777ec28c963676.jpg" },
+            "022": { name: "Smooth shine lipstick", price: 1200, sku: "022", description: "Highly pigmented, moisturizing lipstick that delivers a smooth, glossy finish for plump-looking lips.", image: "WhatsApp Image 2024-10-26 at 13.09.45_fb132a4b.jpg" },
+            "023": { name: "Luxury perfume", price: 1500, sku: "023", description: "An elegant and lasting fragrance that adds a touch of sophistication to every moment.", image: "WhatsApp Image 2024-10-26 at 13.11.36_d5f123a8.jpg" },
+            "024": { name: "Exfoliating Scrub", price: 750, sku: "024", description: "Gentle scrub that removes dead skin cells, leaving skin polished, soft, and radiant.", image: "382afd271948e9f2239c6ad2f78683cf.jpg" },
+            "025": { name: "Gentle Makeup Remover", price: 500, sku: "025", description: "Removes makeup effectively without irritation, leaving skin clean and refreshed.", image: "be683d8d3016175e19ad791b5f6159d2.jpg" },
+            "026": { name: "Gentle Face Wash", price: 300, sku: "026", description: "A mild cleanser that cleans without stripping natural oils, suitable for daily use.", image: "c6b9a2a581c2620eb25ccd0041a4f3c0.jpg" },
+            "027": { name: "Balancing Toner", price: 400, sku: "027", description: "Helps restore skin’s pH balance, reducing oiliness and refining pores for a fresh look.", image: "901f05b73177b8930f037ec2dc4f3750.jpg"},
+            "028": { name: "Beauty blender", price: 250, sku: "028", description: "Soft, reusable blending sponge that ensures seamless foundation application and a flawless finish.", image: "f7698e94d2f433b7b5a5d3885bfe3a0a.jpg" },
+            "029": { name: "Purifying Clay Mask", price: 650, sku: "029", description: "Deep-cleansing clay mask that detoxifies skin and minimizes pores for a clearer complexion.", image: "f862a6df592628d2fc58ae484b8185ac.jpg"},
+            "030": { name: "Radiant Glow Serum", price: 499, originalPrice: 999, sku: "030", description: "Intense hydration for a fresh, dewy complexion all day long.", image: "135e2d769c0ec13a9543261b6a6ad62d.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "031": { name: "HydraBoost Moisturizer", price: 400, originalPrice: 799, sku: "031", description: "Intense hydration for a fresh, dewy complexion all day long.", image: "512ede83a455ac95016611909c6d2cf4.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "032": { name: "Soothing Lip Balm", price: 150, originalPrice: 250, sku: "032", description: "Softens and heals chapped lips with a natural formula", image: "WhatsApp Image 2024-11-02 at 20.53.41_5c3584c6.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "033": { name: "Brightening Eye Cream", price: 450, originalPrice: 899, sku: "033", description: "Reduces dark circles and puffiness for a refreshed look.", image: "adb66770a95d0b262111973817fcd763.jpg" }, // <p><span class="discount">₹500</span> <del>₹999</del></p>
+            "034": { name: "Vitamin C Facial Cleanser", price: 699, sku: "034", description: "Gentle cleanser with Vitamin C for a brightened complexion.", image: "1ef4a03d2bce2f86cbebd00b2b3fe87b.jpg" },
+            "035": { name: "Aloe Vera Gel", price: 499, sku: "035", description: "Calms skin irritation and moisturizes deeply.", image: "c2b6ff59eef39eb9a3e3540ab734064d.jpg" },
+            "036": { name: "Revitalizing Night Cream", price: 1099, sku: "036", description: " Hydrates and repairs your skin while you sleep.", image: "c8d80a30fd0ef5f013c64688810e7e57.jpg" },
+            "037": { name: "Rejuvenating Facial Oil", price: 849, sku: "037", description: "Restores radiance with nourishing oils.", image: "2ab4e13dbac8d32e04c551e5aa7d8810.jpg" },
+            "038": { name: "Charcoal Face Mask", price: 599, sku: "038", description: "Deeply cleanses and removes impurities", image: "8781371513a5f6a828a8cc436fcf869b.jpg" },
+            "039": { name: "Exfoliating Scrub", price: 750, sku: "039", description: "Gently removes dead skin cells for a smooth texture.", image: "382afd271948e9f2239c6ad2f78683cf.jpg" },
+            "040": { name: "Hydrating Face Mist", price: 399, sku: "040", description: "Refreshes and hydrates for an instant glow.", image: "66408da25fb28ed589706c981ce69364.jpg" },
+            "041": { name: "Nourishing Body Lotion", price: 549, sku: "041", description: "Nourishing Body Lotion.", image: "adaae0cc46a19914e41c6d49700c2c26.jpg" }
+        };
+
+        function getSKUFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('sku');
+        }
+
+        function displayProductDetails() {
+            const sku = getSKUFromURL();
+            const product = products[sku];
+            if (product) {
+                document.getElementById("product-image").src = product.image;
+                document.getElementById("product-name").textContent = product.name;
+                document.getElementById("product-sku").textContent = `SKU: ${product.sku}`;
+                document.getElementById("product-price").textContent = `₹${product.price}`;
+                document.getElementById("product-description").textContent = product.description;
+            }
+        }
+
+        function addToCart() {
+            const sku = getSKUFromURL();
+            const quantity = parseInt(document.getElementById("quantity").value);
+            const product = products[sku];
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProduct = cart.find(item => item.sku === sku);
+
+            if (existingProduct) {
+                existingProduct.quantity += quantity;
+            } else {
+                cart.push({ ...product, quantity });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert("Product added to cart!");
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById("cart-count").textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+        }
+
+        window.onload = function() {
+            displayProductDetails();
+            updateCartCount();
+        };
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Dermatifyd</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E0F7FA; /* Light blue background */
+            color: #333;
+        }
+
+        header {
+            background-color: #FFB6C1; /* Baby pink nav bar */
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #FFFFFF; /* White background for the form */
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        .contact-section h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .form-group i {
+            position: absolute;
+            top: 12px;
+            left: 10px;
+            color: #FFB6C1; /* Baby pink icons */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px; /* Adjust padding for smaller input size */
+            padding-left: 35px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input {
+            height: 35px; /* Smaller height for input fields */
+        }
+
+        textarea {
+            height: 80px; /* Reduced height for message box */
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #87CEEB;
+            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+        }
+
+        button {
+            background-color: #87CEEB;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #76b0d6;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        p a {
+            color: #87CEEB;
+            text-decoration: none;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        .thank-you-message {
+            display: none;
+            background-color: #e0ffe0;
+            color: #333;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        /* Social Media Icons */
+        .social-media {
+            margin-top: 30px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .social-media img {
+            width: 32px;
+            height: 32px;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+            }
+
+            input, textarea {
+                padding-left: 35px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="contact-section">
+        <h1>Contact Us</h1>
+        <form id="contact-form" action="mailto:dermatifyd@gmail.com" method="post" enctype="text/plain" onsubmit="showThankYouMessage(); return false;">
+            <div class="form-group">
+                <i class="fa fa-user"></i>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fa fa-envelope"></i>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fa fa-comment"></i>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+        <div class="thank-you-message" id="thank-you-message">
+            <p>Thank you for your message! We will get back to you soon.</p>
+        </div>
+
+        <p>Email us directly at: <a href="mailto:dermatifyd@gmail.com">dermatifyd@gmail.com</a></p>
+
+        <!-- Social Media Links with Image Icons -->
+        <div class="social-media">
+            <p>Follow us on:</p>
+            <a href="https://www.instagram.com/dermatifyd?igsh=anJ4aTBkeTlpZDBm" target="_blank">
+                <img src="hd-official-outline-instagram-ig-logo-icon-png-701751694786948nms5td2hyk.png" alt="Instagram Logo"> Instagram
+            </a>
+            <a href="https://x.com/dermatifyd" target="_blank">
+                <img src="images.png" alt="X Logo"> X (Twitter)
+            </a>
+        </div>
+    </section>
+
+    <script>
+        function showThankYouMessage() {
+            document.getElementById('thank-you-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

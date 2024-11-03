@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dermatifyd - Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #87ceeb;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+        }
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        h2 {
+            color: #333;
+        }
+        #cart-section {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: left;
+        }
+        #cart-items {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .quantity-controls {
+            display: inline-flex;
+            align-items: center;
+        }
+        .quantity-controls button {
+            background-color: #87ceeb;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .remove-button {
+            background-color: #ff6347; /* Red color for the Remove button */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .billing-section {
+            flex: 0.5;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .billing-section input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .billing-section table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .billing-section td {
+            padding: 8px 0;
+        }
+        .billing-section .total {
+            font-weight: bold;
+            color: #333;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .apply-button, .checkout-button {
+            background-color: #87ceeb;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Added margin for spacing */
+        }
+        .apply-button:hover, .checkout-button:hover {
+            background-color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dermatifyd</h1>
+        <div class="cart-icon">
+            <img src="free-shopping-cart-icon-3045-thumb.png" alt="Cart Icon" width="30">
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <h2>Shopping Cart</h2>
+    <div id="cart-section">
+        <div id="cart-items"></div>
+
+        <div class="billing-section">
+            <table>
+                <tr>
+                    <td>Subtotal:</td>
+                    <td id="subtotal">₹0.00</td>
+                </tr>
+                <tr>
+                    <td>GST (5%):</td>
+                    <td id="gst">₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax (3%):</td>
+                    <td id="tax">₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Base Discount (5%):</td>
+                    <td id="base-discount">₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Promo Discount:</td>
+                    <td id="promo-discount">₹0.00</td>
+                </tr>
+                <tr class="total">
+                    <td>Grand Total:</td>
+                    <td id="grand-total">₹0.00</td>
+                </tr>
+            </table>
+
+            <h3>Promo Code</h3>
+            <input type="text" id="promo-code" placeholder="Enter Promo Code">
+            <button class="apply-button" onclick="applyPromoCode()">Apply Promo Code</button>
+            <button class="checkout-button" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let promoDiscountRate = 0;
+        const baseDiscountRate = 0.05;
+
+        const specialProductOffers = [
+            { sku: "SKU034", offerType: "buy2get1" },
+            { sku: "SKU2", offerType: "buy3get2" },
+            // Add more special product offers if needed
+        ];
+
+        function displayCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.textContent = 'Your cart is empty.';
+            } else {
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" width="50" height="50">
+                        <span>${item.name} - ₹${item.price} x ${item.quantity}</span>
+                        <div class="quantity-controls">
+                            <button onclick="updateQuantity('${item.sku}', -1)">-</button>
+                            ${item.quantity}
+                            <button onclick="updateQuantity('${item.sku}', 1)">+</button>
+                        </div>
+                        <button class="remove-button" onclick="removeFromCart('${item.sku}')">Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+            calculateBill();
+            updateCartCount();
+        }
+
+        function updateQuantity(sku, change) {
+            const item = cart.find(item => item.sku === sku);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity < 1) {
+                    item.quantity = 1;
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            }
+        }
+
+        function removeFromCart(sku) {
+            cart = cart.filter(item => item.sku !== sku);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        function calculateBill() {
+            let subtotal = 0;
+            let buy2get1Discount = 0;
+            let buy3get2Discount = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+
+                const offer = specialProductOffers.find(offer => offer.sku === item.sku);
+                if (offer && offer.offerType === 'buy2get1') {
+                    const freeItems = Math.floor(item.quantity / 3);
+                    buy2get1Discount += freeItems * item.price;
+                } else if (offer && offer.offerType === 'buy3get2') {
+                    const freeItems = Math.floor(item.quantity / 5) * 2;
+                    buy3get2Discount += freeItems * item.price;
+                }
+            });
+
+            const gst = subtotal * 0.05;
+            const tax = subtotal * 0.03;
+            const baseDiscount = subtotal * baseDiscountRate;
+            const promoDiscount = subtotal * promoDiscountRate;
+
+            const grandTotal = subtotal + gst + tax - baseDiscount - promoDiscount - buy2get1Discount - buy3get2Discount;
+
+            document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById('gst').textContent = `₹${gst.toFixed(2)}`;
+            document.getElementById('tax').textContent = `₹${tax.toFixed(2)}`;
+            document.getElementById('base-discount').textContent = `₹${baseDiscount.toFixed(2)}`;
+            document.getElementById('promo-discount').textContent = `₹${promoDiscount.toFixed(2)}`;
+            document.getElementById('grand-total').textContent = `₹${grandTotal.toFixed(2)}`;
+        }
+
+        function applyPromoCode() {
+            const promoCode = document.getElementById('promo-code').value;
+            if (promoCode === "123") {
+                promoDiscountRate = 0.10;
+                alert("Promo code applied: 10% discount");
+            } else if (promoCode === "jjk") {
+                promoDiscountRate = 0.25;
+                alert("Promo code applied: 25% discount");
+            } else {
+                promoDiscountRate = 0;
+                alert("Invalid promo code");
+            }
+            calculateBill();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+        }
+
+        function proceedToCheckout() {
+            alert("Proceeding to checkout!");
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            window.location.href = "index.html";
+        }
+
+        window.onload = displayCart;
+    </script>
+</body>
+</html>

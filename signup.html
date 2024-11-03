@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Dermatifyd</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles remain similar to the previous version */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #ffe0f0, #d0f0ff);
+        }
+        .signup-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        label, .password-strength {
+            display: block;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: #6bb7ff;
+            box-shadow: 0px 0px 8px rgba(107, 183, 255, 0.4);
+        }
+        .toggle-password {
+            position: relative;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 0.9rem;
+            color: #6bb7ff;
+            display: inline;
+        }
+        .password-strength {
+            margin-bottom: 1rem;
+        }
+        .strength-bar {
+            height: 8px;
+            width: 100%;
+            background: #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        .strength-bar span {
+            display: block;
+            height: 100%;
+            border-radius: 4px;
+        }
+        .signup-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #ff6ba3;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(255, 107, 163, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form id="signupForm" action="signup_submit.php" method="POST" onsubmit="return validateForm()">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+            <span id="emailError" style="color: red; font-size: 0.8rem; display: none;">Invalid email format</span>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <span class="toggle-password" onclick="togglePassword()">Show</span>
+            <div class="password-strength">
+                <label>Password Strength</label>
+                <div class="strength-bar">
+                    <span id="strengthBar"></span>
+                </div>
+            </div>
+
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <span id="passwordError" style="color: red; font-size: 0.8rem; display: none;">Passwords do not match</span>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const passwordField = document.getElementById("password");
+            const emailField = document.getElementById("email");
+
+            if (passwordField) {
+                passwordField.addEventListener("input", checkPasswordStrength);
+            }
+            
+            if (emailField) {
+                emailField.addEventListener("input", validateEmail);
+            }
+        });
+
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            const toggleBtn = document.querySelector(".toggle-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleBtn.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleBtn.textContent = "Show";
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById("password").value;
+            const strengthBar = document.getElementById("strengthBar");
+            let strength = 0;
+
+            if (password.length >= 8) strength += 1;
+            if (password.match(/[A-Z]/)) strength += 1;
+            if (password.match(/[0-9]/)) strength += 1;
+            if (password.match(/[!@#$%^&*]/)) strength += 1;
+
+            strengthBar.style.width = (strength * 25) + "%";
+            switch (strength) {
+                case 1: strengthBar.style.backgroundColor = "red"; break;
+                case 2: strengthBar.style.backgroundColor = "orange"; break;
+                case 3: strengthBar.style.backgroundColor = "yellow"; break;
+                case 4: strengthBar.style.backgroundColor = "green"; break;
+                default: strengthBar.style.backgroundColor = "#ddd";
+            }
+        }
+
+        function validateEmail() {
+            const emailField = document.getElementById("email");
+            const emailError = document.getElementById("emailError");
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(emailField.value)) {
+                emailError.style.display = "block";
+                return false;
+            } else {
+                emailError.style.display = "none";
+                return true;
+            }
+        }
+
+        function validateForm() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const passwordError = document.getElementById("passwordError");
+
+            if (password !== confirmPassword) {
+                passwordError.style.display = "block";
+                return false;
+            } else {
+                passwordError.style.display = "none";
+            }
+            return validateEmail();
+        }
+
+        function showLogin() {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
